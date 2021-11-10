@@ -6,22 +6,30 @@ import {
   Button,
   Image,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import DefaultStyle from "../constants/default-styles";
 
 const GameOverScreen = (props) => {
   return (
-    <View style={styles.screen}>
-      <Text style={DefaultStyle.bodyText}>The game is over!</Text>
-      <View style={styles.imageContainer}>
-        <Image source={require("../assets/success.png")} style={styles.image} />
+    <ScrollView>
+      <View style={styles.screen}>
+        <Text style={DefaultStyle.bodyText}>The game is over!</Text>
+        <View style={styles.imageContainer}>
+          <Image
+            source={require("../assets/success.png")}
+            style={styles.image}
+          />
+        </View>
+        <View style={styles.resultContainer}>
+          <Text style={styles.resultText}>
+            Number of Rounds: {props.rounds}
+          </Text>
+          <Text style={styles.resultText}>Number was {props.userNumber}</Text>
+          <Button title="NEW GAME" onPress={props.onRestart} />
+        </View>
       </View>
-      <View style={styles.resultContainer}>
-        <Text style={styles.resultText}>Number of Rounds: {props.rounds}</Text>
-        <Text style={styles.resultText}>Number was {props.userNumber}</Text>
-        <Button title="NEW GAME" onPress={props.onRestart} />
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -38,7 +46,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: "black",
     overflow: "hidden",
-    marginVertical: 30,
+    marginVertical: Dimensions.get("window").height / 30,
   },
   image: {
     width: "100%",
@@ -46,11 +54,11 @@ const styles = StyleSheet.create({
   },
   resultContainer: {
     marginHorizontal: 30,
-    marginVertical: 15,
+    marginVertical: Dimensions.get("window").height / 60,
   },
   resultText: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: Dimensions.get("window").height < 400 ? 16 : 20,
   },
 });
 

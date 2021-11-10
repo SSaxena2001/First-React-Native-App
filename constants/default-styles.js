@@ -4,7 +4,7 @@ export default StyleSheet.create({
   bodyText: {
     fontFamily: "open-sans",
   },
-  titleText: {
+  title: {
     fontFamily: "open-sans-bold",
     fontSize: 18,
   },

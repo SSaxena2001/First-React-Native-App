@@ -8,26 +8,32 @@ import {
   Dimensions,
   ScrollView,
 } from "react-native";
-import DefaultStyle from "../constants/default-styles";
+import BodyText from "../components/BodyText";
+import TitleText from "../components/TitleText";
+import MainButton from "../components/MainButton";
+import Colors from "../constants/colors";
 
 const GameOverScreen = (props) => {
   return (
     <ScrollView>
       <View style={styles.screen}>
-        <Text style={DefaultStyle.bodyText}>The game is over!</Text>
+        <TitleText>The game is over!</TitleText>
         <View style={styles.imageContainer}>
           <Image
             source={require("../assets/success.png")}
             style={styles.image}
+            resizeMode="cover"
           />
         </View>
         <View style={styles.resultContainer}>
-          <Text style={styles.resultText}>
-            Number of Rounds: {props.rounds}
-          </Text>
-          <Text style={styles.resultText}>Number was {props.userNumber}</Text>
-          <Button title="NEW GAME" onPress={props.onRestart} />
+          <BodyText style={styles.resultText}>
+            Your phone needed{" "}
+            <Text style={styles.highlight}>{props.roundsNumber}</Text> rounds to
+            guess the number{" "}
+            <Text style={styles.highlight}>{props.userNumber}</Text>.
+          </BodyText>
         </View>
+        <MainButton onPress={props.onRestart}>NEW GAME</MainButton>
       </View>
     </ScrollView>
   );
@@ -38,6 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: 10,
   },
   imageContainer: {
     width: Dimensions.get("window").width * 0.7,
@@ -59,6 +66,10 @@ const styles = StyleSheet.create({
   resultText: {
     textAlign: "center",
     fontSize: Dimensions.get("window").height < 400 ? 16 : 20,
+  },
+  highlight: {
+    color: Colors.primary,
+    fontFamily: "open-sans-bold",
   },
 });
 

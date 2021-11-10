@@ -6,6 +6,7 @@ import {
   Button,
   Alert,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import Number from "../components/Number";
 import Card from "../components/Card";
@@ -13,7 +14,7 @@ import DefaultStyle from "../constants/default-styles";
 
 const renderListItem = (value, idx) => (
   <View key={idx} style={styles.listItem}>
-    <Text style={DefaultStyle.bodyText}>#{idx}</Text>
+    <Text style={DefaultStyle.bodyText}>Round {idx}</Text>
     <Text style={DefaultStyle.bodyText}>{value}</Text>
   </View>
 );
@@ -86,20 +87,21 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 20,
+    marginTop: Dimensions.get("window").height > 600 ? 20 : 10,
     width: 400,
     maxWidth: "90%",
   },
   listContainer: {
     flex: 1,
-    width: "80%",
+    width: Dimensions.get("window").width > 350 ? "60%" : "80%",
   },
   list: {
     flexGrow: 1,
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
   },
   listItem: {
+    width: Dimensions.get("window").width * 0.6,
     borderColor: "#ccc",
     borderWidth: 1,
     padding: 15,
